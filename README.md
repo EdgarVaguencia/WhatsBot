@@ -1,6 +1,8 @@
 WhatsBot
 ========
 
+[![Code Climate](https://codeclimate.com/github/EdgarVaguencia/WhatsBot/badges/gpa.svg)](https://codeclimate.com/github/EdgarVaguencia/WhatsBot)
+
 * Envia mensajes de whastApp sin necesidad de agregar el número a tus contactos.
 * Crea un nuevo chat de ti mismo para tener anotaciones personales.
 
