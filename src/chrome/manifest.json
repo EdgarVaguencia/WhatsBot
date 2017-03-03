@@ -15,7 +15,7 @@
         }
     ],
     "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
-    "description": "Automatizando el envio de mensajes en whatsapp, envia mensajes a usuario que no tienes agregados o incluso genera un nuevo chat de ti mismo para tener anotaciones",
+    "description": "Automatizando el envio de mensajes en whatsapp, envia msj a usuario que no tienes agregados o un nuevo chat de ti.",
     "icons": {
         "128": "icons/icon-128.png",
         "48": "icons/icon-48.png",
