@@ -5,7 +5,6 @@ reading = (function() {
     document.body.appendChild(scrip);
 
     function _read(msj, sender, cb) {
-        console.info(sender);
         switch(msj.action) {
             case 'sendMsj':
                 window && window.postMessage && window.postMessage({origin: 'WhatsBot', info: msj}, 'https://web.whatsapp.com');
@@ -13,7 +12,6 @@ reading = (function() {
             break;
             default:
                 cb(500);
-                console.log('Saludos');
             break;
         }
     }

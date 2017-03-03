@@ -37,3 +37,5 @@ popAction = (function() {
     }
 
 })();
+
+WhBo.whatsTab();

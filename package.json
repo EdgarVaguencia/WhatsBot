@@ -7,12 +7,13 @@
   "author": "Edgar Valencia <isc.edgarvalencia@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "del": "^2.2.2",
     "gulp": "^3.9.1",
-    "gulp-clean": "^0.3.2",
-    "gulp-foreach": "^0.1.0",
+    "gulp-csso": "^2.0.0",
+    "gulp-jsmin": "^0.1.5",
     "gulp-load-plugins": "^1.4.0",
+    "gulp-rename": "^1.2.2",
     "gulp-stylus": "^2.6.0",
-    "gulp-uglify": "^2.0.1",
     "gulp-zip": "^3.2.0",
     "run-sequence": "^1.2.2"
   }

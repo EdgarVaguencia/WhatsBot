@@ -3,3 +3,9 @@ tmp/
 
 #node
 node_modules/
+
+#dist
+dist/
+
+#css
+src/css/

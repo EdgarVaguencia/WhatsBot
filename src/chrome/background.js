@@ -1,6 +1,4 @@
 var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-76663200-3']);
-_gaq.push(['_trackPageview']);
 (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
     ga.src = 'https://ssl.google-analytics.com/ga.js';
@@ -35,7 +33,7 @@ WhBo = (function() {
     manifest = chrome.runtime.getManifest()
 
     chrome.runtime.onInstalled.addListener(function(detail) {
-        detail.reason == 'install' ? (_track({info: manifest.version, type: 'install'}), closeWhatsTab()) : detail.reason == 'update' && _track({info: manifest.version, type: 'update'})
+        detail.reason === 'install' ? (_track({info: manifest.version, type: 'install'}), closeWhatsTab()) : detail.reason === 'update' && _track({info: manifest.version, type: 'update'})
     });
 
     function closeWhatsTab () {
@@ -53,3 +51,5 @@ WhBo = (function() {
         trackPage: _page,
     }
 })();
+
+WhBo.trackPage();

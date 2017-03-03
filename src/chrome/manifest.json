@@ -10,12 +10,12 @@
     "content_scripts": [
         {
             "matches": ["https://web.whatsapp.com/"],
-            "js": ["js/whatsPage.js", "background.config.js"],
+            "js": ["js/whatsPage.min.js", "background.config.min.js"],
             "run_at": "document_end"
         }
     ],
     "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
-    "description": "Automatizando el envio de mensajes en whatsapp",
+    "description": "Automatizando el envio de mensajes en whatsapp, envia mensajes a usuario que no tienes agregados o incluso genera un nuevo chat de ti mismo para tener anotaciones",
     "icons": {
         "128": "icons/icon-128.png",
         "48": "icons/icon-48.png",
@@ -30,6 +30,6 @@
         "tabs",
         "activeTab"
     ],
-    "version": "0.1.0",
+    "version": "0.1.1",
     "web_accessible_resources": ["public/*"]
 }

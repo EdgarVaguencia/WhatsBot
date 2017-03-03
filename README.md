@@ -1,9 +1,10 @@
 WhatsBot
 ========
 
-Envia mensajes de whastApp sin necesidad de agregar el número a tus contactos
+* Envia mensajes de whastApp sin necesidad de agregar el número a tus contactos.
+* Crea un nuevo chat de ti mismo para tener anotaciones personales.
 
-[![](/assets/ChromeWebStore_Badge_v2_340x96.png)](https://chrome.google.com/webstore/detail/whatsbot/mbkelgobfdkpnhddomomandmihfcnlnb)
+[![](/assets/ChromeWebStore.png)](https://chrome.google.com/webstore/detail/whatsbot/mbkelgobfdkpnhddomomandmihfcnlnb)
 
 Screenshot
 ----------
