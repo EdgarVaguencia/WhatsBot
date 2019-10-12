@@ -1,20 +1,24 @@
 {
-  "name": "WhatsBot",
+  "name": "whatsbot",
   "version": "0.1.0",
   "description": "Automatizando el envio de mensajes dentro del cliente web de whatsapp",
   "main": "\"\"",
   "repository": "https://github.com/edgarvaguencia/whatsBot.git",
   "author": "Edgar Valencia <isc.edgarvalencia@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "watch": "yarn gulp",
+    "build": "yarn gulp build",
+    "dist": "yarn gulp dist"
+  },
   "devDependencies": {
-    "del": "^2.2.2",
-    "gulp": "^3.9.1",
-    "gulp-csso": "^2.0.0",
+    "del": "5.1.0",
+    "gulp": "4.0.2",
+    "gulp-csso": "3.0.1",
     "gulp-jsmin": "^0.1.5",
-    "gulp-load-plugins": "^1.4.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-stylus": "^2.6.0",
-    "gulp-zip": "^3.2.0",
-    "run-sequence": "^1.2.2"
+    "gulp-load-plugins": "2.0.1",
+    "gulp-rename": "1.4.0",
+    "gulp-stylus": "2.7.0",
+    "gulp-zip": "5.0.1"
   }
 }

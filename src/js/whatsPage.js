@@ -1,25 +1,24 @@
-reading = (function() {
+const reading = (function () {
+  var scrip = document.createElement('script')
+  scrip.setAttribute('src', window['chrome'].extension.getURL('/public/whatsWeb.min.js'))
+  document.body.appendChild(scrip)
 
-    var scrip = document.createElement('script');
-    scrip.setAttribute('src', chrome.extension.getURL('/public/whatsWeb.js'));
-    document.body.appendChild(scrip);
-
-    function _read(msj, sender, cb) {
-        switch(msj.action) {
-            case 'sendMsj':
-                window && window.postMessage && window.postMessage({origin: 'WhatsBot', info: msj}, 'https://web.whatsapp.com');
-                cb(200);
-            break;
-            default:
-                cb(500);
-            break;
-        }
+  function _read (msj, sender, cb) {
+    let status = 200
+    switch (msj.action) {
+      case 'sendMsj':
+        window && window.postMessage && window.postMessage({ origin: 'WhatsBot', info: msj }, 'https://web.whatsapp.com')
+        break
+      default:
+        status = 500
+        break
     }
+    cb(status)
+  }
 
-    return {
-        read: _read,
-    }
+  return {
+    read: _read
+  }
+})()
 
-})();
-
-chrome.runtime && chrome.runtime.onMessage && chrome.runtime.onMessage.addListener(reading.read.bind());
+window['chrome'].runtime && window['chrome'].runtime.onMessage && window['chrome'].runtime.onMessage.addListener(reading.read.bind())

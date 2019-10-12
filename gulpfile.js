@@ -1,78 +1,91 @@
-const gulp = require('gulp');
-const _$ = require('gulp-load-plugins')();
-const rsequence = require('run-sequence');
-const del = require('del');
+const gulp = require('gulp')
+const _$ = require('gulp-load-plugins')()
+const del = require('del')
+const manifest = require('./src/chrome/manifest.json')
 
-const srcJs = ['src/**/*.js', '!src/vendor/*.js'];
-const srcCs = ['src/stylus/*.styl'];
+const srcJs = ['src/**/*.js', '!src/vendor/*.js']
+const srcCs = ['src/stylus/*.styl']
 
-gulp.task('clean', function(cb) {
-    return del('./tmp/**/*');
-    cb(err);
-});
+function clean (cb) {
+  del('./tmp/**/*')
+  cb()
+}
 
-gulp.task('build', ['clean'], function() {
-    rsequence('chrome')
+const chromeFiles = gulp.series(chromeHtml, chromeJs, chromeIcons, chromeCss, chromeVendor, chromeJson)
+
+gulp.task('build', gulp.series(clean, chromeFiles))
+
+gulp.task('dist', gulp.series(chromeFiles, chromeZip))
+
+function chromeJson (cb) {
+  gulp.src('./src/chrome/*.json')
+    .pipe(gulp.dest('./tmp/chrome'))
+  cb()
+}
+
+function chromeHtml (cb) {
+  universalFile('chrome', 'html', cb)
+}
+
+exports.js = chromeJs
+function chromeJs (cb) {
+  gulp.src(srcJs)
+    .pipe(_$.jsmin())
+    .pipe(_$.rename(function (path) {
+      if (path.dirname === 'chrome') {
+        path.dirname = './'
+      }
+      path.basename += '.min'
+    }))
+    .pipe(gulp.dest('tmp/chrome'))
+    .on('error', function (err) {
+      console.error('Js: ' + err.toString())
+    })
+  cb()
+}
+
+function chromeIcons (cb) {
+  universalFile('chrome', 'icons', cb)
+}
+
+function chromeCss (cb) {
+  gulp.src(srcCs)
+    .pipe(_$.stylus())
+    .pipe(_$.csso())
+    .on('error', err => {
+      console.error(err.toString())
+    })
+    .pipe(_$.rename({ dirname: 'css', suffix: '.min' }))
+    .pipe(gulp.dest('tmp/chrome'))
+    .on('error', err => {
+      console.error(err.toString())
+    })
+  cb()
+}
+
+function chromeVendor (cb) {
+  universalFile('chrome', 'vendor', cb)
+}
+
+function chromeZip (cb) {
+  gulp.src('./tmp/chrome/**/*')
+    .pipe(_$.zip(`whatsbot_${manifest.version}.zip`))
+    .pipe(gulp.dest('./dist'))
+  cb()
+}
+
+gulp.task('watch', function (cb) {
+  gulp.watch(srcJs, gulp.series(chromeJs))
+  gulp.watch(srcCs, gulp.series(chromeCss))
+  gulp.watch(['src/chrome/manifest.json'], gulp.series(chromeJson))
+  gulp.watch(['src/html/*.html'], gulp.series(chromeHtml))
+  cb()
 })
 
-gulp.task('dist', ['chrome:zip']);
-
-gulp.task('chrome', ['chrome:html', 'chrome:js', 'chrome:icons', 'chrome:css', 'chrome:vendor'], function() {
-    return gulp.src('./src/chrome/*.json')
-        .pipe(gulp.dest('./tmp/chrome'));
-});
-
-gulp.task('chrome:html', function(cb) {
-    return universalFile('chrome', 'html');
-    cb(err);
-});
-
-gulp.task('chrome:js', function(cb) {
-    return gulp.src(srcJs)
-        .pipe(_$.jsmin())
-        .pipe(_$.rename(function(path) {
-            if (path.dirname === 'chrome') {
-                path.dirname = './'
-            }
-            path.basename += '.min';
-        }))
-        .pipe(gulp.dest('tmp/chrome'))
-        cb(err);
-});
-
-gulp.task('chrome:icons', function(cb) {
-    return universalFile('chrome', 'icons');
-    cb(err);
-});
-
-gulp.task('chrome:css', function(cb) {
-    return gulp.src(srcCs)
-        .pipe(_$.stylus())
-        .pipe(_$.csso())
-        .pipe(gulp.dest('src/css/'))
-        .pipe(_$.rename({dirname: 'css', suffix: '.min'}))
-        .pipe(gulp.dest('tmp/chrome'))
-    cb(err);
-});
-
-gulp.task('chrome:vendor', function(cb) {
-    return universalFile('chrome', 'vendor');
-    cb(err);
-});
-
-gulp.task('chrome:zip', function() {
-    return gulp.src('./tmp/chrome/**/*')
-        .pipe(_$.zip('chrome.zip'))
-        .pipe(gulp.dest('./dist'));
-});
-
-gulp.task('watch', function() {
-    gulp.watch(srcJs, ['build']);
-    gulp.watch(srcCs, ['build'])
-    gulp.watch(['src/chrome/manifest.json', 'src/html/*.html'], ['build'])
-});
-
-function universalFile(folderName, files) {
-    return gulp.src('./src/' + files + '/*')
-        .pipe(gulp.dest('./tmp/' + folderName + '/' + files));
+function universalFile (folderName, files, cb) {
+  gulp.src('./src/' + files + '/*')
+    .pipe(gulp.dest('./tmp/' + folderName + '/' + files))
+  cb()
 }
+
+exports.default = gulp.series('watch')

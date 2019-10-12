@@ -1,15 +1,14 @@
-window.WhBoCo = (function(){
+window.WhBoCo = (function () {
+  var _config = {
+    contacts: {},
+    chats: {}
+  }
 
-    var _config = {
-        contacts : {},
-        chats: {}
-    }
+  function _returnConfig () {
+    return _config
+  }
 
-    function _returnConfig() {
-        return _config;
-    }
-
-    return {
-        get: _returnConfig
-    }
-})();
+  return {
+    get: _returnConfig
+  }
+})()

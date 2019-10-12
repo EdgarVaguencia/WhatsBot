@@ -1,45 +1,45 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maxium-scale=1">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-        <link rel="stylesheet" href="../css/style.min.css">
-        <script src="../vendor/jquery.min.js"></script>
-        <script src="../vendor/jquery-ui.min.js"></script>
-        <script defer src="../vendor/material.min.js"></script>
-    </head>
-    <body>
-        <header></header>
-        <section id="body">
-            <div id="form">
-                <div id="country" class="mdl-textfield mdl-js-textfield">
-                    <input type="text" id="id_country" class="mdl-textfield__input">
-                    <label for="id_country" class="mdl-textfield__label">Country</label>
-                </div>
-                <div id="number">
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input type="text" class="mdl-textfield__input" pattern="[0-9]*" id="id_code">
-                        <label for="id_code" class="mdl-textfield__label">Code</label>
-                    </div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input type="text" class="mdl-textfield__input" pattern="[0-9]*" id="id_number">
-                        <label for="id_number" class="mdl-textfield__label">Number</label>
-                        <span class="mdl-textfield__error">Input is not a number</span>
-                    </div>
-                </div>
-                <div id="msj" class="mdl-textfield mdl-js-textfield">
-                    <textarea name="msj" id="id_msj" cols="10" rows="3" class="mdl-textfield__input" type="text"></textarea>
-                    <label for="id_msj" class="mdl-textfield__label">Text ...</label>
-                </div>
-                <div id="controls">
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="id_send">send</button>
-                </div>
-            </div>
-        </section>
-        <script src="../background.min.js"></script>
-        <script src="../js/app.min.js"></script>
-    </body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="../css/style.min.css">
+    <script src="../vendor/jquery.min.js"></script>
+    <script src="../vendor/jquery-ui.min.js"></script>
+    <script defer src="../vendor/material.min.js"></script>
+  </head>
+  <body>
+    <header></header>
+    <section id="body">
+      <div id="form">
+        <div id="country" class="mdl-textfield mdl-js-textfield">
+          <input type="text" id="id_country" class="mdl-textfield__input">
+          <label for="id_country" class="mdl-textfield__label">Country</label>
+        </div>
+        <div id="number">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input type="text" class="mdl-textfield__input" pattern="[0-9]*" id="id_code">
+            <label for="id_code" class="mdl-textfield__label">Code</label>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input type="text" class="mdl-textfield__input" pattern="[0-9]*" id="id_number">
+            <label for="id_number" class="mdl-textfield__label">Number</label>
+            <span class="mdl-textfield__error">Input is not a number</span>
+          </div>
+        </div>
+        <div id="msj" class="mdl-textfield mdl-js-textfield">
+          <textarea name="msj" id="id_msj" cols="10" rows="3" class="mdl-textfield__input" type="text"></textarea>
+          <label for="id_msj" class="mdl-textfield__label">Text ...</label>
+        </div>
+        <div id="controls">
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="id_send">send</button>
+        </div>
+      </div>
+    </section>
+    <script src="../background.min.js"></script>
+    <script src="../js/app.min.js"></script>
+  </body>
 </html>
