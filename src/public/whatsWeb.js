@@ -1,40 +1,67 @@
 ((win) => {
-  let modules
+  const modulesWhats = [
+    {
+      id: 'Store',
+      exists: module => {
+        return module.default && module.default.Chat ? module.default : null
+      }
+    },
+    {
+      id: 'Chats',
+      exists: module => {
+        return module.sendTextMsgToChat ? module : null
+      }
+    }
+  ]
 
   const timerId = setInterval(() => {
-    if (win.localStorage.WABrowserId) {
+    if (win.localStorage.WABrowserId || win.sessionStorage.WABrowserId) {
       clearInterval(timerId)
       getModules()
     }
   }, 5000)
 
   function getModules () {
-    win['webpackJsonp']([],
-      {
-        123: function (module, exports, __webpack_require__) {
-          modules = __webpack_require__.c
-          isReady()
-        }
-      }, [123])
+    if (typeof window['webpackJsonp'] === 'function') {
+      window['webpackJsonp']([],
+        {
+          [123]: (m, e, webPackModule) => isReady(webPackModule.c)
+        }, [123])
+    } else {
+      window['webpackJsonp'].push([
+        [123], {
+          123: (m, e, webPackModule) => isReady(webPackModule.c)
+        }, [[123]]
+      ])
+    }
   }
 
-  function isReady () {
+  function isReady (modules) {
+    let moduleFound = 0
     const timeModules = setInterval(() => {
-      if (modules['dbbhhgjjbg'] && modules['bhggeigghg']) {
-        if (modules['bhggeigghg'].exports.default.Chat) {
-          win['Store'] = requireId(modules['bhggeigghg'].i.replace(/"/g, '"')).default
+      for (let idMod in modules) {
+        if (modules[idMod].exports) {
+          modulesWhats.forEach(needModule => {
+            if (needModule.module) return
+            let exposeModule = needModule.exists(modules[idMod].exports)
+            if (exposeModule !== null) {
+              moduleFound++
+              needModule.module = exposeModule
+            }
+          })
+          if (moduleFound === modulesWhats.length) {
+            let storeModule = modulesWhats.find(m => m.id === 'Store')
+            win['Store'] = storeModule.module ? storeModule.module : {}
+            modulesWhats.splice(modulesWhats.indexOf(storeModule), 1)
+            modulesWhats.forEach(mod => {
+              win['Store'][mod.id] = mod.module
+            })
+            clearInterval(timeModules)
+            console.info('Listo: WhatsBot')
+          }
         }
-        if (modules['dbbhhgjjbg'].exports.sendTextMsgToChat) {
-          window['Chatme'] = requireId(modules['dbbhhgjjbg'].i.replace(/"/g, '"'))
-        }
-        clearInterval(timeModules)
-        console.info('Listo: WhatsBot')
       }
     })
-  }
-
-  function requireId (id) {
-    return window['webpackJsonp']([], null, [id])
   }
 })(window)
 
@@ -52,7 +79,7 @@ const whatsInject = (function () {
         number = '' + obj.code + '1' + obj.tel + '@c.us'
         break
       default:
-        number = '' + obj.code + obj.tel + '@c.us';
+        number = '' + obj.code + obj.tel + '@c.us'
         break
     }
     return number
@@ -60,12 +87,16 @@ const whatsInject = (function () {
 
   function _chat (data) {
     var number = _formatNumber({ code: data.code, tel: data.tel })
-    return number.length === 0 ? void 0 : window['Store'].Chat.get(number) === undefined ? window['Store'].Chat.add({ cmd: 'action', id: number }, { merge: !0 }) : window['Store'].Chat.get(number)
+    return number.length === 0 ? { isChat: false } : window['Store'].Chat.get(number) === undefined ? { isChat: false } : { isChat: true, chat: window['Store'].Chat.get(number) }
   }
 
   function _msj (data) {
     const c = _chat(data)
-    window['Chatme'].sendTextMsgToChat(c, data.txt)
+    if (c.isChat) {
+      window['Store'].Chats.sendTextMsgToChat(c.chat, data.txt)
+    } else {
+      window.location.href = 'https://api.whatsapp.com/send?phone=' + _formatNumber({ code: data.code, tel: data.tel }).split('@')[0]
+    }
   }
 
   function _read (msj) {

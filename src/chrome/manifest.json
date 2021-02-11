@@ -21,7 +21,6 @@
     "48": "icons/icon-48.png",
     "16": "icons/icon-16.png"
   },
-  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAt/5ED+WWae/EbKEyviDGoHPQBUvWaAIDcQ83rKq5Uh/UJTEfTlE5IKIQoPpVThkcy7s5XOx+SQp+0GIrak975Kt6KHK32XbhSEaZ1KzBLaqBmm1w/Al2JqHEmocXhQzU/Cez9VC+8Lq7OfpByhf1xy1CEDtaBZiCnTpi8pBqC58P+/zGA9nk1DjZSmbNkV6/ZQdiqCzzVg5lTF7QUxJlzOiVOIUtqfUXn8Etqfb8mJZ69caBwnTbxw4OIIThgSCiLASFDjEPsFMEe94Exp8esfcy3J4SvLkTXGniYM7sb1rsL3Zisy6qTUiqMDS368+5dtXEG+nCq8nBiNlRawIonwIDAQAB",
   "manifest_version": 2,
   "name": "WhatsBot",
   "permissions": [
@@ -31,6 +30,6 @@
     "tabs",
     "activeTab"
   ],
-  "version": "0.2.1",
+  "version": "0.3.0",
   "web_accessible_resources": ["public/*"]
 }

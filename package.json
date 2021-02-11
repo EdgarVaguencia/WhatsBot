@@ -1,6 +1,6 @@
 {
   "name": "whatsbot",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "Automatizando el envio de mensajes dentro del cliente web de whatsapp",
   "main": "\"\"",
   "repository": "https://github.com/edgarvaguencia/whatsBot.git",

@@ -22,7 +22,7 @@ const WhBo = (function () {
 
   function _track (obj) {
     _gaq.push(['_setAccount', 'UA-76663200-3'])
-    _gaq.push(['_trackEvent', obj.info, obj.type])
+    _gaq.push(['_trackEvent', obj.info, obj.type, manifest.version])
   }
 
   function _page () {
@@ -44,7 +44,7 @@ const WhBo = (function () {
       case 'update':
         _track({ info: manifest.version, type: 'update' })
         break
-    } 
+    }
   })
 
   function closeWhatsTab () {

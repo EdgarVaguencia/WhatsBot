@@ -11,14 +11,14 @@
         return e.name === ui.item.value
       })
       window['jQuery']('#id_code').val(result[0].country_code)
-      window['WhBo'].tracking({ type: 'country', info: result[0].name })
+      WhBo.tracking({ type: 'country', info: result[0].name })
     }
   })
 
   window['jQuery']('#id_send').on('click', function (e) {
     e.preventDefault()
     const txt = window['jQuery']('#id_msj').val()
-    window['WhBo'].tracking({ type: 'click', info: 'sendMessage' })
+    WhBo.tracking({ type: 'click', info: 'sendMessage' })
     txt.length > 0 ? _sendMessage({ tel: window['jQuery']('#id_number').val(), code: window['jQuery']('#id_code').val(), txt: txt }, (status) => {
       console.info(status)
     }) : void 0
@@ -29,7 +29,7 @@
       action: 'sendMsj',
       data: obj
     }
-    window['WhBo'].whatsTab((tab) => {
+    WhBo.whatsTab((tab) => {
       window['chrome'].tabs.sendMessage(tab.id, request, status => {
         return callback(status)
       })

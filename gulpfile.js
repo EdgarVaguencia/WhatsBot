@@ -27,9 +27,8 @@ function chromeHtml (cb) {
   universalFile('chrome', 'html', cb)
 }
 
-exports.js = chromeJs
 function chromeJs (cb) {
-  gulp.src(srcJs)
+  return gulp.src(srcJs)
     .pipe(_$.jsmin())
     .pipe(_$.rename(function (path) {
       if (path.dirname === 'chrome') {
@@ -41,7 +40,6 @@ function chromeJs (cb) {
     .on('error', function (err) {
       console.error('Js: ' + err.toString())
     })
-  cb()
 }
 
 function chromeIcons (cb) {
