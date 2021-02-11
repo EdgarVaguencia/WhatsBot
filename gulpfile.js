@@ -29,7 +29,7 @@ function chromeHtml (cb) {
 
 function chromeJs (cb) {
   return gulp.src(srcJs)
-    .pipe(_$.jsmin())
+    .pipe(_$.uglify())
     .pipe(_$.rename(function (path) {
       if (path.dirname === 'chrome') {
         path.dirname = './'
